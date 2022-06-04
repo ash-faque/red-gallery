@@ -1,0 +1,112 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+} body{
+    width: 100vw;
+    padding-right: 10px;
+    background: #d3d3d3;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+
+
+#config_wrap{
+    z-index: 10000;
+
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #131313;
+    color: #ffffff;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}#configuration{
+    width:  clamp(240px, 100%, 540px);
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}#configuration *{
+    padding: 10px;
+    width: clamp(240px, 80%, 540px);
+    text-align: center;
+}
+
+
+.fab{
+    z-index: 10000;
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    width: 100%;
+
+    display: flex;
+}.fab button{
+    margin-top: 10px;
+
+    flex-grow: 1;
+    flex-shrink: 0;
+
+    border: 1px solid #fff;
+
+    padding: 10px;
+    font-size: 15px;
+    text-transform: uppercase;
+
+    background: #222222;
+    color: #ffffff;
+    box-shadow: 0 0 5px #000000;
+}
+
+
+
+#reel_roll{
+    width: clamp(240px, 90%, 540px);
+    margin: 0 auto;
+}
+@media only screen and (orientation: portrait){
+    #reel_roll{
+        width: 100%;
+        padding: 0 10px;
+    }
+}
+
+
+.post{
+    width: 100%;
+    margin: 20px auto;
+    overflow: hidden;
+    border-radius: 20px;
+
+    border: 2px solid #888888;
+    background: #141414;
+    color: #dadada;
+    box-shadow: 0 0 10px #292929;
+
+    position: relative;
+}.title:any-link{
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: large;
+    text-decoration: none;
+    color: #dadada;
+    text-transform: capitalize;
+}.image{
+    width: 100%;
+}.deatil{
+    padding: 10px;
+}

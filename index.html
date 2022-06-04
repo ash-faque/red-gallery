@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RED-REEL</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- req config -->
+    <div id="config_wrap">
+        <form id="configuration">
+            <h1>RED-REEL-SETTINGS</h1>
+            <p>configure the requests you make</p>
+            <label for="subreddit_name">subreddit name without r/ at the biginning</label>
+            <input type="text" name="subreddit_name" required
+                autocomplete="off"
+                placeholder="subreddit" id="subreddit_name">
+            <label for="listing">listing criteria</label>
+            <select name="listing" id="listing">
+                <option value="best">best</option>
+                <option value="controversial">controversial</option>
+                <option value="hot" selected>hot</option>
+                <option value="new">new</option>
+                <option value="random">random</option>
+                <option value="rising">rising</option>
+                <option value="top">top</option>
+                <option value=""></option>
+                <option value="sort">sort</option>
+            </select>
+            <label for="limit">limit of load on a request 2-6</label>
+            <input type="range" name="limit" id="limit" 
+               value="1" min="1" max="6">
+            <button type="submit">configure</button>
+        </form> 
+    </div>
+
+    <!-- fabs -->
+    <div class="fab">
+        <button onclick="loadFeed(1)">load</button>
+        <button onclick="switchMode()">mode</button>
+        <button onclick="openConfiguration()">config</button>
+    </div>
+
+
+    <!-- reels -->
+    <div id="reel_roll">
+    </div>
+
+    <!-- script -->
+    <script src="./script.js"></script>
+</body>
+</html>
