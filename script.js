@@ -106,16 +106,13 @@ window.onscroll = function() {
 
 
 let mode = true;
-const mode_btn = document.getElementById('mode')
 // switchMode
 const switchMode = (label) => {
     mode = !mode;
     if (mode){
-        toast('Auto mode')
-        mode_btn.style.display = 'none'
+        toast('Auto mode enaled')
     } else {
-        toast('Manual mode')
-        mode_btn.style.display = 'block'
+        toast('Manual mode enaled')
     };
 };
 
@@ -123,6 +120,7 @@ const switchMode = (label) => {
 const loadFeed = (__limit) => {
 
     console.log('-------FETCHING------')
+    toast(`loading posts`)
 
     let url = `https://www.reddit.com/r/${config.subreddit_name}/${config.listing}.json?limit=${__limit ? __limit : config.limit}&after=${config.after}`;
 
@@ -158,7 +156,7 @@ const loadFeed = (__limit) => {
                 if (/\.(jpg|jpeg|png|webp|avif|gif|svg|gifv)$/.test(url)){
                 
                     let div = document.createElement('div')
-                    div.innerHTML = `<a target="_blanlk" href="http://reddit.com${permalink}" class="title">${title}</a>
+                    div.innerHTML = `<p class="title">${title} <a target="_blanlk" href="http://reddit.com${permalink}"> [GO] </a></p>
                                 <img src="${url}" loading="lazy" class="image">
                                 <div class="deatil">
                                     <p class="created_at">Posted at ${created_utc}</p>
@@ -178,11 +176,12 @@ const loadFeed = (__limit) => {
 
             });
 
-            if(images_loaded === 0) loadFeed(1);
+            if(images_loaded === 0) loadFeed(5);
         })
 
     }).catch(e => {
         console.log(e)
+        toast(e.toString(), true)
     })
 
 };
