@@ -4,15 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RED-REEL</title>
+    <title>R-Gallery</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+
+    <!-- toast -->
+    <div id="toast"></div>
+
     <!-- req config -->
     <div id="config_wrap">
         <form id="configuration">
-            <h1>R-Gallery Settings</h1>
+            <h1>R-Gallery Settings</h1> <hr>
             <p>configure the requests you make</p>
             <label for="subreddit_name">subreddit name without r/ at the biginning</label>
             <input type="text" name="subreddit_name" required
@@ -30,18 +34,20 @@
                 <option value=""></option>
                 <option value="sort">sort</option>
             </select>
-            <label for="limit">limit of load on a request 2-6</label>
-            <input type="range" name="limit" id="limit" 
-               value="1" min="1" max="6">
+            <label for="limit">limit of load on a request 1-5</label>
+            <input type="range" name="limit" id="limit" value="1" min="1" max="5"
+            oninput="toast(this.value)"><hr>
+            <label for="mode">turn on for manual mode of feed loading
+                <input type="checkbox" name="mode" id="mode" style="width: 20px;"
+                oninput="switchMode(this)"></label> <hr>
             <button type="submit">configure</button>
         </form> 
     </div>
 
     <!-- fabs -->
     <div class="fab">
-        <button onclick="loadFeed(1)">load</button>
-        <button onclick="switchMode()">mode</button>
         <button onclick="openConfiguration()">config</button>
+        <button onclick="loadFeed(1)" id="mode">load</button>
     </div>
 
 

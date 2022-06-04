@@ -14,6 +14,22 @@ let config = {
 };
 
 
+// toast
+const toast_block = document.getElementById('toast')
+const toast = (msg = "", isError = false) => {
+    let p = document.createElement('p')
+    p.innerHTML = `<p>${msg}</p><span onclick="this.parentElement.remove()">x</span>`
+    toast_block.append(p)
+    if (isError){
+        p.style.background = 'red'
+    } else{
+        setTimeout(() => {
+            p.remove()
+        }, 2000)
+    }
+}
+
+
 // save the details
 configuration.addEventListener('submit', e => {
     e.preventDefault()
@@ -23,8 +39,8 @@ configuration.addEventListener('submit', e => {
     config.subreddit_name = configuration.subreddit_name.value
     config.limit = configuration.limit.value
     config.listing = configuration.listing.value
-
-    console.table(config)
+    // console.table(config)
+    toast(`r/${config.subreddit_name} limited to ${config.limit} listed by ${config.listing}`)
     
     localStorage.subreddit_name = config.subreddit_name
     localStorage.limit = config.limit
@@ -48,13 +64,14 @@ window.addEventListener('load', e => {
         config.limit = localStorage.limit
         config.listing = localStorage.listing || 'hot'
 
-        console.table(config)
-        
+        // console.table(config)
         configuration.subreddit_name.value = config.subreddit_name
         configuration.limit.value = config.limit
         configuration.listing.value = config.listing
 
         console.log('-----ASSIGNED TO FORM-----')
+
+        toast(`r/${config.subreddit_name} limited to ${config.limit} listed by ${config.listing}`)
 
         config_wrap.style.display = 'none' 
     }
@@ -74,11 +91,10 @@ const openConfiguration = () => {
 
 
 
-let mode = true;
 // // scroll listener
 let fired_once = false, padding = 50;
 window.onscroll = function() {
-    console.log((window.innerHeight + Math.ceil(window.pageYOffset)), document.body.offsetHeight)
+    // console.log((window.innerHeight + Math.ceil(window.pageYOffset)), document.body.offsetHeight)
     if ((window.innerHeight + Math.ceil(window.pageYOffset)) + padding >= document.body.offsetHeight && !fired_once){
         fired_once = true
         if (mode) loadFeed()
@@ -88,9 +104,20 @@ window.onscroll = function() {
     };
 };
 
-// switchMode
-const switchMode = () => mode != mode;
 
+let mode = true;
+const mode_btn = document.getElementById('mode')
+// switchMode
+const switchMode = (label) => {
+    mode = !mode;
+    if (mode){
+        toast('Auto mode')
+        mode_btn.style.display = 'none'
+    } else {
+        toast('Manual mode')
+        mode_btn.style.display = 'block'
+    };
+};
 
 // get reddit
 const loadFeed = (__limit) => {
@@ -134,10 +161,10 @@ const loadFeed = (__limit) => {
                     div.innerHTML = `<a target="_blanlk" href="http://reddit.com${permalink}" class="title">${title}</a>
                                 <img src="${url}" loading="lazy" class="image">
                                 <div class="deatil">
+                                    <p class="created_at">Posted at ${created_utc}</p>
                                     <span class="auther">By ${author} </span>
                                     <span class="subreddit"> from r/${subreddit} </span>
                                     <span class="ups"> with ${ups} upvotes.</span>
-                                    <p class="created_at">Posted at ${created_utc}</p>
                                     <p class="selftext">${selftext}</p>
                                 </div>`;
 
@@ -151,7 +178,7 @@ const loadFeed = (__limit) => {
 
             });
 
-            if(images_loaded === 0) loadFeed(3);
+            if(images_loaded === 0) loadFeed(1);
         })
 
     }).catch(e => {
