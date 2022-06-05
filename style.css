@@ -6,7 +6,6 @@
 } body{
     width: 100vw;
     padding-right: 10px;
-    background: #525252;
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -21,15 +20,13 @@
     position: fixed;
     top: 0;
     left: 0;
-    background: #333030f1;
-    color: #ffffff;
+    background: #fefefe;
 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }#configuration{
-    background: #2e2e2eb7;
     padding: 50px 0;
     width:  100%;
     max-width: 540px;
@@ -42,7 +39,6 @@
 }#configuration h1{
     margin-bottom: 30px;
     padding: 10px;
-    background-color: #333333;
 }#configuration p{
     text-transform: uppercase;
     margin-bottom: 20px;
@@ -82,15 +78,13 @@
     flex-grow: 1;
     flex-shrink: 0;
 
-    border: 3px solid #fff;
-
     padding: 10px;
-    font-size: 15px;
+    font-size: 25px;
     text-transform: uppercase;
 
-    background: #222222;
-    color: #ffffff;
-    box-shadow: 0 0 15px #000000;
+    filter: grayscale(100%);
+    border: 3px solid #4d4d4d;
+    box-shadow: 0 0 5px #838383;
 }
 
 
@@ -98,7 +92,7 @@
 #reel_roll{
     width: clamp(240px, 90%, 540px);
     margin: 0 auto;
-    padding: 100px 0;
+    padding: 50px 0;
 }
 @media only screen and (orientation: portrait){
     #reel_roll{
@@ -118,10 +112,8 @@
     border-radius: 20px;
 
     padding: 0 5px;
-    border: 3px solid #ebebeb;
-    background: #6e6e6edc;
-    color: #dadada;
-    box-shadow: 0 0 20px #292929;
+    border: 2px solid #5f5f5f;
+    box-shadow: 0 0 10px #868686;
 
     position: relative;
 }.title{
@@ -136,23 +128,23 @@
     text-decoration: none;
 }.image{
     width: 100%;
-    border: 2px solid #fff;
+    border: 2px solid #5c5c5c;
     border-radius: 10px;
 }.deatil{
     padding: 10px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }.created_at{
     font-family: 'Courier New', Courier, monospace;
-    color: #9effd2;
+    color: #003b20;
     font-size: small;
     margin-bottom: 10px;
 }.auther{
-    color: #86e3ff;
+    color: #002530;
     font-size: large;
 }.subreddit{
-    color: #ffe09e;
+    color: #2c1e00;
 }.ups{
-    color: #9effb3;
+    color: #002408;
 }
 
 

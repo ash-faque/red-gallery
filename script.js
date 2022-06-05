@@ -10,6 +10,8 @@ let config = {
     limit: '1',
     listing: 'new',
 
+    resolution: 2,
+
     after: ''
 };
 
@@ -25,7 +27,7 @@ const toast = (msg = "", isError = false) => {
     } else{
         setTimeout(() => {
             p.remove()
-        }, 2000)
+        }, 2500)
     }
 }
 
@@ -39,12 +41,13 @@ configuration.addEventListener('submit', e => {
     config.subreddit_name = configuration.subreddit_name.value
     config.limit = configuration.limit.value
     config.listing = configuration.listing.value
-    // console.table(config)
-    toast(`r/${config.subreddit_name} limited to ${config.limit} listed by ${config.listing}`)
+    config.resolution = configuration.resolution.value
+    toast(`r/${config.subreddit_name} limited to ${config.limit} listed by ${config.listing} & resolution ${config.resolution}`)
     
     localStorage.subreddit_name = config.subreddit_name
     localStorage.limit = config.limit
     localStorage.listing = config.listing
+    localStorage.resolution = config.resolution
 
     console.log('-----WROTE IN LS-----')
 
@@ -62,16 +65,17 @@ window.addEventListener('load', e => {
 
         config.subreddit_name = localStorage.subreddit_name
         config.limit = localStorage.limit
-        config.listing = localStorage.listing || 'hot'
+        config.listing = localStorage.listing || 'new'
+        config.resolution = localStorage.resolution || 2
 
-        // console.table(config)
         configuration.subreddit_name.value = config.subreddit_name
         configuration.limit.value = config.limit
         configuration.listing.value = config.listing
+        configuration.resolution.value = config.resolution
 
         console.log('-----ASSIGNED TO FORM-----')
 
-        toast(`r/${config.subreddit_name} limited to ${config.limit} listed by ${config.listing}`)
+        toast(`r/${config.subreddit_name} limited to ${config.limit} listed by ${config.listing} & resolution ${config.resolution}`)
 
         config_wrap.style.display = 'none' 
     }
@@ -137,8 +141,6 @@ const loadFeed = (__limit) => {
 
             data.data.children.forEach(child => {
 
-                // console.log(child.data)
-
                 let author = child.data.author,
                     created_utc = (new Date(child.data.created_utc * 1000)).toString().slice(0, 24),
                     is_video = child.data.is_video,
@@ -148,16 +150,17 @@ const loadFeed = (__limit) => {
                     subreddit = child.data.subreddit,
                     title = child.data.title,
                     ups = child.data.ups,
-                    url = child.data.url;
+                    url = child.data.url,
+                    
+                    resolutions = preview.images[0].resolutions;
 
-                // console.table(preview[0])
-                console.log(created_utc)
+                    // console.log(resolutions[3])
 
                 if (/\.(jpg|jpeg|png|webp|avif|gif|svg|gifv)$/.test(url)){
                 
                     let div = document.createElement('div')
                     div.innerHTML = `<p class="title">${title} <a target="_blanlk" href="http://reddit.com${permalink}"> [GO] </a></p>
-                                <img src="${url}" loading="lazy" class="image">
+                                <img src="${resolutions[config.resolution].url}" loading="lazy" class="image">
                                 <div class="deatil">
                                     <p class="created_at">Posted at ${created_utc}</p>
                                     <span class="auther">By ${author} </span>

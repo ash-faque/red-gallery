@@ -24,10 +24,10 @@
                 placeholder="subreddit" id="subreddit_name">
             <label for="listing">listing criteria</label>
             <select name="listing" id="listing">
+                <option value="new">new</option>
                 <option value="best">best</option>
                 <option value="controversial">controversial</option>
                 <option value="hot" selected>hot</option>
-                <option value="new">new</option>
                 <option value="random">random</option>
                 <option value="rising">rising</option>
                 <option value="top">top</option>
@@ -36,16 +36,19 @@
             </select>
             <label for="limit">limit of load on a request 1-5</label>
             <input type="range" name="limit" id="limit" value="1" min="1" max="5"
-            oninput="toast(this.value)"><hr>
+                oninput="toast(`Loading limited to: ` + this.value)">
+            <label for="resolution">choose the resolution</label>
+            <input type="range" name="resolution" id="resolution" value="2" min="0" max="5"
+                oninput="toast('Resolution set to: ' + this.value + '/6')"><hr>
             <button type="submit">configure</button>
         </form> 
     </div>
 
     <!-- fabs -->
     <div class="fab">
-        <button onclick="switchMode(this)">mode</button>
-        <button onclick="openConfiguration()">config</button>
-        <button onclick="loadFeed(1)" id="mode">load</button>
+        <button onclick="switchMode(this)">🚜</button>
+        <button onclick="openConfiguration()">⚙️</button>
+        <button onclick="loadFeed(1)" id="mode">✴️</button>
     </div>
 
 
